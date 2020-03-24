@@ -3,9 +3,8 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'rex-repos',
   template: `
-    <p>
-      repos works!
-    </p>
+    <rex-repos-search></rex-repos-search>
+    <rex-repos-list></rex-repos-list>
   `,
   styles: []
 })
