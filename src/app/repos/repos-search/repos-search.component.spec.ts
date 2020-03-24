@@ -22,4 +22,14 @@ describe('ReposSearchComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  describe('on button click', () => {
+    it('should emit the input value if it is not empty', () => {
+      fail();
+    });
+
+    it('should display validation message if input value is empty', () => {
+      fail();
+    });
+  });
 });
