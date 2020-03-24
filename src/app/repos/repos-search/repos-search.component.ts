@@ -6,7 +6,7 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
   <form action="javascript:void(0);">
     <div>
       <input #usernameInput type="text" placeholder="Github username" (keyup)="clearValidationMessage()">
-      <div *ngIf="validationMessage">{{ validationMessage }}</div>
+      <div *ngIf="validationMessage" class="validation_message">{{ validationMessage }}</div>
     </div>
     <button (click)="emitUsername(usernameInput.value)">Show repos</button>
   </form>

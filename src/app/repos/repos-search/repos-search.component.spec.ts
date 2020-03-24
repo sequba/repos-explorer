@@ -5,6 +5,8 @@ import { ReposSearchComponent } from './repos-search.component';
 describe('ReposSearchComponent', () => {
   let component: ReposSearchComponent;
   let fixture: ComponentFixture<ReposSearchComponent>;
+  let input: HTMLInputElement;
+  let button: HTMLButtonElement;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -16,6 +18,8 @@ describe('ReposSearchComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ReposSearchComponent);
     component = fixture.componentInstance;
+    input = fixture.nativeElement.querySelector('input');
+    button = fixture.nativeElement.querySelector('button');
     fixture.detectChanges();
   });
 
@@ -24,12 +28,23 @@ describe('ReposSearchComponent', () => {
   });
 
   describe('on button click', () => {
-    it('should emit the input value if it is not empty', () => {
-      fail();
+    it('should emit the input value if it is not empty', (done) => {
+      component.username.subscribe((emitted: string | null) => {
+        expect(emitted).toEqual('superuser');
+        done();
+      });
+
+      input.value = 'superuser';
+      button.click();
+      fixture.detectChanges();
     });
 
     it('should display validation message if input value is empty', () => {
-      fail();
+      button.click();
+      fixture.detectChanges();
+
+      const validationMessage: HTMLElement = fixture.nativeElement.querySelector('.validation_message');
+      expect(validationMessage.textContent).toEqual('Please, type a username');
     });
   });
 });
