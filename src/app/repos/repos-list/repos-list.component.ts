@@ -1,15 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'rex-repos-list',
   template: `
-    <p>
-      repos-list works!
-    </p>
+    <div>{{ repos }}</div>
   `,
   styles: []
 })
 export class ReposListComponent implements OnInit {
+  @Input() repos?: string;
 
   constructor() { }
 
