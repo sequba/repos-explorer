@@ -14,7 +14,7 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
   styles: []
 })
 export class ReposSearchComponent implements OnInit {
-  @Input() validationMessage: string | null = null;
+  validationMessage: string | null = null;
   @Output() username = new EventEmitter<string>();
   readonly emptyUsernameMsg = 'Please, type a username';
 

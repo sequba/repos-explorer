@@ -22,4 +22,6 @@ describe('ReposComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  // integration tests
 });

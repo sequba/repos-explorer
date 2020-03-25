@@ -13,4 +13,13 @@ describe('ReposStoreService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  describe('getNonForkReposByUser$', () => {
+    it('should return only non-fork repos', (done) => {
+      service.getNonForkReposByUser$('testuser').subscribe(repos => {
+        fail();
+        done();
+      });
+    });
+  });
 });
