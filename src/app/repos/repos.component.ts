@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ReposStoreService } from './repos-store/repos-store.service';
 import { Observable, NEVER } from 'rxjs';
+import { Repo } from '../dtos/repo';
 
 @Component({
   selector: 'rex-repos',
@@ -11,15 +12,15 @@ import { Observable, NEVER } from 'rxjs';
   styles: []
 })
 export class ReposComponent implements OnInit {
-  repos: Observable<string> = NEVER;
+  repos: Observable<Repo[]> = NEVER;
 
   constructor(private reposStore: ReposStoreService) { }
 
   showRepos(user: string): void {
-    this.repos = this.reposStore.getReposByUser$(user);
+    this.repos = this.reposStore.getNonForkReposByUser$(user);
+    // handle errors?
   }
 
   ngOnInit(): void {
   }
-
 }
