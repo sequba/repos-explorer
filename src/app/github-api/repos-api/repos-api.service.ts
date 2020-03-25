@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, forkJoin } from 'rxjs';
+import { Observable, forkJoin, of } from 'rxjs';
 import { tap, map, switchMap } from 'rxjs/operators';
 
 import { RepoResponse } from './responses/repo-response';
@@ -24,7 +24,7 @@ export class ReposApiService {
       map(repos => repos.map(this.buildRepoDto)),
       switchMap(repos => {
         const reposWithBranches: Observable<Repo>[] = repos.map(this.fetchBranchesForRepo$.bind(this));
-        return forkJoin(reposWithBranches);
+        return (reposWithBranches.length > 0) ? forkJoin(reposWithBranches) : of([]);
       })
     );
   }
