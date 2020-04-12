@@ -9,13 +9,16 @@ import { Repo } from 'src/app/dtos/repo';
       <div>Owner: {{ repo.owner}}</div>
 
       <ng-container *ngIf="repo.branches && repo.branches.length > 0">
-        <div>Branches:</div>
-        <ul>
-          <li *ngFor="let branch of repo.branches">
-            <div>{{ branch.name }}</div>
-            <div>{{ branch.lastCommitSha }}</div>
-          </li>
-        </ul>
+        <table class="table table-bordered table-dark table-sm">
+          <thead><tr>
+            <th>Branch</th>
+            <th>Last commit SHA</th>
+          </tr></thead>
+          <tbody><tr *ngFor="let branch of repo.branches">
+            <td>{{ branch.name }}</td>
+            <td>{{ branch.lastCommitSha }}</td>
+          </tr></tbody>
+        </table>
       </ng-container>
     <ng-container>
   `,
