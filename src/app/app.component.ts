@@ -3,7 +3,9 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'rex-root',
   template: `
-    <h1>ReposExplorer</h1>
+    <div class="jumbotron text-center">
+      <h1>ReposExplorer</h1>
+    </div>
     <router-outlet></router-outlet>
   `,
   styles: []

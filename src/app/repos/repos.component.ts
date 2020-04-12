@@ -7,9 +7,16 @@ import { map, catchError } from 'rxjs/operators';
 @Component({
   selector: 'rex-repos',
   template: `
-    <rex-repos-search (username)="showRepos($event)"></rex-repos-search>
-    <div *ngIf="errorMessage" class="error_message">{{ errorMessage }}</div>
-    <rex-repos-list [repos]="repos | async"></rex-repos-list>
+    <div class="container">
+      <div class="row p-3 my-3 bg-primary text-white">
+        <rex-repos-search (username)="showRepos($event)"></rex-repos-search>
+      </div>
+
+      <div *ngIf="errorMessage" class="card bg-warning">
+        <p>{{ errorMessage }}</p>
+      </div>
+      <rex-repos-list [repos]="repos | async" class="row"></rex-repos-list>
+    </div>
   `,
   styles: []
 })
