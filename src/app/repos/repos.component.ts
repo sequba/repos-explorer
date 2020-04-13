@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ReposStoreService } from './repos-store/repos-store.service';
 import { Observable, NEVER, BehaviorSubject } from 'rxjs';
 import { Repo } from '../dtos/repo';
-import { map, catchError, share, mapTo, tap, finalize } from 'rxjs/operators';
+import { catchError, finalize, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'rex-repos',
@@ -14,8 +14,8 @@ import { map, catchError, share, mapTo, tap, finalize } from 'rxjs/operators';
       <div *ngIf="isLoading | async" class="row d-flex justify-content-center">
         <div class="row spinner-border text-primary"></div>
       </div>
-      <div *ngIf="errorMessage" class="alert alert-dark">
-        {{ errorMessage }}
+      <div *ngIf="message" class="alert alert-dark">
+        {{ message }}
       </div>
       <rex-repos-list [repos]="repos | async" class="row"></rex-repos-list>
     </div>
@@ -24,22 +24,28 @@ import { map, catchError, share, mapTo, tap, finalize } from 'rxjs/operators';
 })
 export class ReposComponent implements OnInit {
   repos: Observable<Repo[]> = NEVER;
-  errorMessage: string | null = null;
+  message: string | null = null;
   isLoading = new BehaviorSubject<boolean>(false);
 
   readonly userNotFoundMsg = 'User not found';
   readonly genericErrorMsg = 'Fetching data from Github failed';
+  readonly noReposForUser = 'Found no repositories owned by this user';
 
   constructor(private reposStore: ReposStoreService) { }
 
   showRepos(user: string): void {
-    this.errorMessage = null;
+    this.message = null;
     this.isLoading.next(true);
 
     this.repos = this.reposStore.getNonForkReposByUser$(user).pipe(
       catchError(err => {
-        this.errorMessage = (err.status === 404) ? this.userNotFoundMsg : this.genericErrorMsg;
+        this.message = (err.status === 404) ? this.userNotFoundMsg : this.genericErrorMsg;
         return [];
+      }),
+      tap(repos => {
+        if (repos.length <= 0) {
+          this.message = this.noReposForUser;
+        }
       }),
       finalize(() => this.isLoading.next(false))
     );
