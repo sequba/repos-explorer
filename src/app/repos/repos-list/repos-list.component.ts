@@ -4,13 +4,11 @@ import { Repo } from 'src/app/dtos/repo';
 @Component({
   selector: 'rex-repos-list',
   template: `
-    <ng-container *ngIf="repos">
-      <ul>
-        <li *ngFor="let repo of repos">
-          <rex-repos-list-item [repo]="repo"></rex-repos-list-item>
-        </li>
-      </ul>
-    </ng-container>
+    <div *ngIf="repos" class="container">
+      <ng-container *ngFor="let repo of repos">
+        <rex-repos-list-item [repo]="repo"></rex-repos-list-item>
+      </ng-container>
+    </div>
   `,
   styles: []
 })
