@@ -14,7 +14,7 @@ import { catchError, finalize, tap } from 'rxjs/operators';
       <div *ngIf="isLoading | async" class="row d-flex justify-content-center">
         <div class="row spinner-border text-primary"></div>
       </div>
-      <div *ngIf="message" class="alert alert-dark">
+      <div *ngIf="message" class="alert alert-dark m-5">
         {{ message }}
       </div>
       <rex-repos-list [repos]="repos | async" class="row"></rex-repos-list>
