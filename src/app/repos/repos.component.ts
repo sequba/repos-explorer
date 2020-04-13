@@ -11,8 +11,8 @@ import { catchError, finalize, tap } from 'rxjs/operators';
       <div class="row card p-3 my-3 bg-primary text-white">
         <rex-repos-search (username)="showRepos($event)"></rex-repos-search>
       </div>
-      <div *ngIf="isLoading | async" class="row d-flex justify-content-center">
-        <div class="row spinner-border text-primary"></div>
+      <div *ngIf="isLoading | async" class="row">
+        <div class="row spinner-border text-primary mx-auto"></div>
       </div>
       <div *ngIf="message" class="alert alert-dark m-5">
         {{ message }}
