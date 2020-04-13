@@ -6,7 +6,7 @@ import { Repo } from 'src/app/dtos/repo';
   template: `
     <div *ngIf="repo" class="card bg-light my-3">
       <div class="card-body px-0 px-sm-4">
-        <h3 class="card-title">{{ repo.name }} <span class="badge badge-secondary">{{ repo.owner}}</span></h3>
+        <h3 class="card-title mx-1">{{ repo.name }} <span class="badge badge-secondary">{{ repo.owner}}</span></h3>
 
         <ng-container *ngIf="repo.branches && repo.branches.length > 0">
           <table class="card-text table table-bordered table-sm small">
