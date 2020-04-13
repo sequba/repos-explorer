@@ -5,8 +5,7 @@ import { Repo } from 'src/app/dtos/repo';
   selector: 'rex-repos-list-item',
   template: `
     <ng-container *ngIf="repo">
-      <h3>{{ repo.name }}</h3>
-      <div>Owner: {{ repo.owner}}</div>
+      <h3>{{ repo.name }} <span class="badge badge-secondary">{{ repo.owner}}</span></h3>
 
       <ng-container *ngIf="repo.branches && repo.branches.length > 0">
         <table class="table table-bordered table-dark table-sm">

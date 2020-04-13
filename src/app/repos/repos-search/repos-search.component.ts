@@ -8,7 +8,7 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
       <input #usernameInput type="text" placeholder="Github username" (keyup)="clearValidationMessage()">
       <div *ngIf="validationMessage" class="validation_message">{{ validationMessage }}</div>
     </div>
-    <button (click)="emitUsername(usernameInput.value)">Show repos</button>
+    <button (click)="emitUsername(usernameInput.value)" class="btn btn-light">Show repos</button>
   </form>
   `,
   styles: []
@@ -16,7 +16,7 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 export class ReposSearchComponent implements OnInit {
   validationMessage: string | null = null;
   @Output() username = new EventEmitter<string>();
-  readonly emptyUsernameMsg = 'Please, type a username';
+  readonly emptyUsernameMsg = 'Username cannot be empty';
 
   constructor() { }
 
