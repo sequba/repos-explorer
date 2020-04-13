@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'rex-repos-search',
@@ -6,7 +6,7 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
   <form action="javascript:void(0);" class="form form-inline dflex justify-content-center align-items-start mt-3">
     <div class="form-group-inline">
       <input #usernameInput type="text" (input)="clearValidationMessage()" placeholder="Github username" class="form-control">
-      <small [ngStyle]="{'visibility': validationMessage ? 'visible' : 'hidden'}" class="form-text validation_message">
+      <small [ngClass]="{'invisible': !showMsg }" class="form-text validation_message">
         {{ emptyUsernameMsg }}
       </small>
     </div>
@@ -16,7 +16,7 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
   styles: []
 })
 export class ReposSearchComponent implements OnInit {
-  validationMessage: string | null = null;
+  showMsg = false;
   @Output() username = new EventEmitter<string>();
   readonly emptyUsernameMsg = 'Username cannot be empty';
 
@@ -26,12 +26,12 @@ export class ReposSearchComponent implements OnInit {
     if (usernameInputValue) {
       this.username.emit(usernameInputValue);
     } else {
-      this.validationMessage = this.emptyUsernameMsg;
+      this.showMsg = true;
     }
   }
 
   clearValidationMessage(): void {
-    this.validationMessage = null;
+    this.showMsg = false;
   }
 
   ngOnInit(): void {
