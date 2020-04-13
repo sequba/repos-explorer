@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ReposStoreService } from './repos-store/repos-store.service';
 import { Observable, NEVER, BehaviorSubject } from 'rxjs';
 import { Repo } from '../dtos/repo';
-import { map, catchError, share, mapTo, tap } from 'rxjs/operators';
+import { map, catchError, share, mapTo, tap, finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'rex-repos',
@@ -11,11 +11,11 @@ import { map, catchError, share, mapTo, tap } from 'rxjs/operators';
       <div class="row card p-3 my-3 bg-primary text-white">
         <rex-repos-search (username)="showRepos($event)"></rex-repos-search>
       </div>
-      <div *ngIf="errorMessage" class="alert alert-dark">
-        {{ errorMessage }}
-      </div>
       <div *ngIf="isLoading | async" class="row d-flex justify-content-center">
         <div class="row spinner-border text-primary"></div>
+      </div>
+      <div *ngIf="errorMessage" class="alert alert-dark">
+        {{ errorMessage }}
       </div>
       <rex-repos-list [repos]="repos | async" class="row"></rex-repos-list>
     </div>
@@ -41,7 +41,7 @@ export class ReposComponent implements OnInit {
         this.errorMessage = (err.status === 404) ? this.userNotFoundMsg : this.genericErrorMsg;
         return [];
       }),
-      tap(() => this.isLoading.next(false))
+      finalize(() => this.isLoading.next(false))
     );
   }
 

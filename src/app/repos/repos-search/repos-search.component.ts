@@ -3,12 +3,14 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 @Component({
   selector: 'rex-repos-search',
   template: `
-  <form action="javascript:void(0);">
-    <div>
-      <input #usernameInput type="text" placeholder="Github username" (keyup)="clearValidationMessage()">
-      <div *ngIf="validationMessage" class="validation_message">{{ validationMessage }}</div>
+  <form action="javascript:void(0);" class="form form-inline dflex justify-content-center align-items-start mt-3">
+    <div class="form-group-inline">
+      <input #usernameInput type="text" (input)="clearValidationMessage()" placeholder="Github username" class="form-control">
+      <small [ngStyle]="{'visibility': validationMessage ? 'visible' : 'hidden'}" class="form-text validation_message">
+        {{ emptyUsernameMsg }}
+      </small>
     </div>
-    <button (click)="emitUsername(usernameInput.value)" class="btn btn-light">Show repos</button>
+    <button (click)="emitUsername(usernameInput.value)" class="btn btn-light mx-1">Show repos</button>
   </form>
   `,
   styles: []
