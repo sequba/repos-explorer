@@ -44,7 +44,7 @@ describe('ReposSearchComponent', () => {
       fixture.detectChanges();
 
       const validationMessage: HTMLElement = fixture.nativeElement.querySelector('.validation_message');
-      expect(validationMessage.textContent).toEqual('Please, type a username');
+      expect(validationMessage.textContent?.trim()).toEqual('Username cannot be empty');
     });
   });
 });
